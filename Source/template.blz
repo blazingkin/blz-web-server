@@ -1,0 +1,26 @@
+import FileSystem
+require response
+constructor StaticTemplate(filepath)
+
+    handle = open(filepath)
+    contents = handle.read_all()
+    handle.close()
+
+    html? = filepath.contains?(".html")
+    json? = filepath.contains?(".json")
+    if html?
+        type = "text/html"
+    else if json?
+        type = "application/json"
+    else
+        type = "text/plain"
+    else
+
+    end
+
+    :render
+        headers = {}
+        headers["Content-Type"] = type
+        Response(contents, headers, 200)
+    end
+end

@@ -1,0 +1,16 @@
+require simple_http_server
+require response
+require template
+
+template = StaticTemplate("index.html")
+
+:handler(request)
+    if request.method == "GET"
+        template.render()
+    else
+        Response("Unsupported method", {}, 405)
+    end
+end
+
+SimpleHTTPServer(handler)
+
