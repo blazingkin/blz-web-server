@@ -73,8 +73,8 @@ constructor SimpleHTTPServer(handler, port)
         if parts.length() != 3
             return reject_request(res, 400, "Invalid HTTP Request")
         end
-        if parts[2] != "HTTP/1.1"
-            return reject_request(res, 400, "This server only supports HTTP 1.1")
+        if parts[2] != "HTTP/1.1" || res[2] != "HTTP/1.0"
+            return reject_request(res, 400, "This server only supports HTTP 1.1 and 1.0")
         end
         method = parts[0]
         path = parts[1]
