@@ -2,11 +2,13 @@ require simple_http_server
 require response
 require template
 
-template = StaticTemplate("index.html")
+template = FindAndReplaceTemplate("index.html")
 
 :handler(request)
     if request.method == "GET"
-        template.render()
+        replace = {}
+        replace["{target}"] = "Something else"
+        template.render(replace)
     else
         Response("Unsupported method", {}, 405)
     end
